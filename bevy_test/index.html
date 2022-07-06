@@ -1,7 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html dir="ltr" lang="en">
   <head>
     <meta charset="UTF-8" />
+    <title>Bevy demo!!</title>
+    <meta name="description" content="A little demo using Bevy so that I can learn how it works lol" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
     <style>
       html, body {
         margin: 0;
@@ -12,12 +16,12 @@
       body {
         background: linear-gradient(
           135deg,
-          #111315 0%,
-          #111315 49%,
-          #606870 49%,
-          #606870 51%,
-          #111315 51%,
-          #111315 100%
+          #111513 0%,
+          #111513 49%,
+          #607068 49%,
+          #607068 51%,
+          #111513 51%,
+          #111513 100%
         );
         background-repeat: repeat;
         background-size: 20px 20px;
@@ -29,13 +33,15 @@
         margin: 0;
         padding: 0;
         /* offset-x | offset-y | blur-radius | spread-radius | color */
-        box-shadow: 0 0 16px 2px #000000;
+        box-shadow: 0 0 16px 2px #000;
         background-color: #000;
       }
     </style>
   </head>
+
   <script type="module">
-    import init from './bevy_test.js'
-    init()
+    import init from "./bevy_test.js";
+
+    init();
   </script>
 </html>
