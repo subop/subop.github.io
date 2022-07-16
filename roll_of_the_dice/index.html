@@ -15,6 +15,7 @@
         --dark: #282e2f;
         --medium: #505d5e;
         --light: #a0b9bc;
+        --very-light: #c0d9dd;
       }
 
       html,
@@ -49,12 +50,15 @@
         background-color: #000;
       }
 
+      #loading,
       button {
         margin: auto;
         color: var(--light);
-        background-color: var(--very-dark);
         padding: 1rem;
         font-size: 2rem;
+      }
+      button {
+        background-color: var(--very-dark);
         /* width | style | color */
         border: 2px solid var(--medium);
         border-radius: 1rem;
@@ -63,26 +67,68 @@
       }
       button:hover {
         cursor: pointer;
-        color: var(--light);
+        color: var(--very-light);
         background-color: var(--dark);
         padding: 1.125rem;
         /* offset-x | offset-y | blur-radius | spread-radius | color */
         box-shadow: 0 0 24px 4px #000;
       }
+
+      #loading {
+        /* offset-x | offset-y | blur-radius | color */
+        text-shadow: 0 0 6px #000;
+        text-align: start;
+        cursor: wait;
+      }
+      #loading::after {
+        /* offset-x | offset-y | blur-radius | color */
+        text-shadow: 0 0 6px #000;
+        text-align: start;
+        content: "";
+        animation-duration: 3s;
+        animation-name: dotdotdot;
+        animation-iteration-count: infinite;
+      }
+      @keyframes dotdotdot {
+        0% {
+          content: "";
+        }
+
+        25% {
+          content: ".";
+        }
+
+        50% {
+          content: "..";
+        }
+
+        75% {
+          content: "...";
+        }
+      }
     </style>
   </head>
 
-  <body>
+  <body id="body">
     <button id="play-button">Play!</button>
   </body>
 
   <script type="module">
     import init from "./roll_of_the_dice.js";
 
+    const body = document.getElementById("body");
     const playButton = document.getElementById("play-button");
     playButton.addEventListener("click", () => {
       playButton.remove();
-      init();
+
+      const loading = document.createElement("span");
+      loading.setAttribute("id", "loading");
+      const loadingText = document.createTextNode("Loading");
+      loading.appendChild(loadingText);
+      body.appendChild(loading);
+      const removeLoading = () => loading.remove();
+
+      init().then(removeLoading, removeLoading);
     }, { once: true });
   </script>
 </html>
